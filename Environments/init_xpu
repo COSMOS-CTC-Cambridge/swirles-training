@@ -1,0 +1,21 @@
+module load intel/mpi/2021.13
+module load intel/mkl/2024.2
+module load intel/compiler-intel-llvm/2024.2.0
+source /opt/intel/oneapi/2024.2/oneapi-vars.sh
+source /local/scratch/public/intel/oneapi/intelpython/env/vars.sh
+conda activate pytorch-gpu
+
+export I_MPI_PMI_LIBRARY=/usr/lib/x86_64-linux-gnu/libpmi2.so
+#export I_MPI_OFFLOAD=1
+#unset ZE_AFFINITY_MASK
+#export ZE_FLAT_DEVICE_HIERARCHY=FLAT
+#export I_MPI_OFFLOAD_TOPOLIB=level_zero
+#export I_MPI_OFFLOAD_PIN=1
+export I_MPI_DEBUG=3
+
+export FI_PROVIDER=sockets
+export ZES_ENABLE_SYSMAN=1 
+export CCL_ZE_IPC_EXCHANGE=sockets
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/alt/applic/user-maint/jk945/level-zero/install/lib/
+
+alias my_sysmon='watch -n 1 /alt/applic/user-maint/jk945/pti-gpu/tools/sysmon/install/bin/sysmon'
