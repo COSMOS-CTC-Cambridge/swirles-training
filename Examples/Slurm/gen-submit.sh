@@ -5,7 +5,7 @@
 #SBATCH --ntasks=<#tasks>         #how many tasks (usu MPI ranks) in total 
 #SBATCH --cpus-per-task=<#cpus>   #set to >1 to use OpenMP threads
 #SBATCH --time=hh:mm:ss       
-#SBATCH --gres=gpu:<#gpus>        #necessary for GPU resources, can go up to 4
+
 
 mpi_tasks_per_node=$(echo "$SLURM_TASKS_PER_NODE" | sed -e  's/^\([0-9][0-9]*\).*$/\1/')
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
