@@ -18,14 +18,16 @@ echo "NODELIST="${SLURM_NODELIST}
 master_addr=$(scontrol show hostnames "$SLURM_JOB_NODELIST" | head -n 1)
 export MASTER_ADDR=$master_addr
 echo "MASTER_ADDR="$MASTER_ADDR
+export RANK=$SLURM_PROCID
+export WORLD_SIZE=$SLURM_NTASKS
 
 
 export MY_WORKING_DIRECTORY=/cephfs/home/jk945/swirles-training/Examples/ML
 export MY_EXEC="python ./resnet_ddp.py"
-export MY_OPTIONS=""
+export MY_EXEC_OPTIONS=""
 
 source /cephfs/store/gr-eps1/jk945/.torch-cuda/bin/activate
 cd ${MY_WORKING_DIRECTORY}
 
 
-srun ${MY_EXEC} ${MY_OPTIONS}
+srun ${MY_EXEC} ${MY_EXEC_OPTIONS}
